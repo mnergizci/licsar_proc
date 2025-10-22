@@ -5,20 +5,22 @@ Created on 10/02/2024
 University of Leeds
 Gamma Remote Sensing
 contact: mr.nergizci@gmail.com
+
+This script will prepare
 '''
 import argparse
 import numpy as np
 import os
 import py_gamma as pg
 import sys
-import subprocess
+# import subprocess
 import shutil
 import time
 import multiprocessing as mp
 import LiCSAR_misc as misc
 from modules_sw_mn import *  # functions saved here
-import lics_unwrap as lu
-import pickle
+# import lics_unwrap as lu
+# import pickle
 
 #Just for colored outputs
 BLUE = '\033[94m'
@@ -164,6 +166,7 @@ if __name__ == "__main__":
     if args.epoch_list:
         with open(args.epoch_list, "r") as f:
             epochs = [line.strip() for line in f if line.strip()]
+        epochs = list(set(epochs)) # possible duplicities?
     else:
         epochs = [epoch for epoch in os.listdir(RSLC_folder) if os.path.isdir(os.path.join(RSLC_folder, epoch))]
         # if master in epochs: ## Keep it, I am not sure master epoch should be excluded or not.
