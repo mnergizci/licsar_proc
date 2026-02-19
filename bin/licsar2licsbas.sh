@@ -431,13 +431,14 @@ for meta in E N U hgt; do
   # echo "getting metafiles from GEOC/lookangles" # - might need updating in future"
   ln -s `pwd`/lookangles/$master.geo.$meta.tif `pwd`/$master.geo.$meta.tif
  else
-  ln -s $metadir/$frame.geo.$meta.tif
+  # ln -s $metadir/$frame.geo.$meta.tif
+  cp $metadir/$frame.geo.$meta.tif .
  fi
  # ln -sf "$metadir/$frame.geo.$meta.tif" "$frame.geo.$meta.tif"
 
   if [ "$sbovl" -gt 0 ] && [ "$meta" != "hgt" ]; then
     if [ -s "$metadir/$frame.geo.$meta.azi.tif" ]; then  # Check the file and ensure it's not empty
-      ln -sf "$metadir/$frame.geo.$meta.azi.tif" "$frame.geo.$meta.azi.tif"
+      cp "$metadir/$frame.geo.$meta.azi.tif" "$frame.geo.$meta.azi.tif"
     else
       need_to_generate_azi=1  # Mark that we need to generate azi files
     fi
@@ -477,7 +478,7 @@ if [ "$sbovl" -gt 0 ] && [ "$need_to_generate_azi" -eq 1 ]; then
   # Create missing symbolic links for azi files
   for meta in E N U; do # hgt is same 
     if [ ! -s "$frame.geo.$meta.azi.tif" ]; then
-      ln -sf "$metadir/$frame.geo.$meta.azi.tif" "$frame.geo.$meta.azi.tif"
+      cp "$metadir/$frame.geo.$meta.azi.tif" "$frame.geo.$meta.azi.tif"
     fi
   done
 fi
@@ -493,7 +494,7 @@ if [ $dolocal == 1 ]; then
    disadir=`pwd`; cd $workdir; create_geoctiffs_to_pub.sh -M . $master; cd $disadir
  fi
 fi
-ln -s $metadir/baselines
+cp $metadir/baselines .
 
 
 if [ -f $workdir/GEOC.MLI/$master/$master.geo.mli.tif ]; then
@@ -511,23 +512,26 @@ if [ ! -f $epochdir/$master/$master.geo.mli.tif ]; then
  fi
 fi
 if [ -f $epochdir/$master/$master.geo.mli.tif ]; then
- ln -s $epochdir/$master/$master.geo.mli.tif
+ cp $epochdir/$master/$master.geo.mli.tif .
 else
  echo "warning, primary epoch not in public dir. trying to use other, expect possible size issues.."
  lastimg=`ls $epochdir/*/*.geo.mli.tif | tail -n1`
- ln -s $lastimg
+ cp $lastimg .
 fi
 fi
 
 
 if [ $dogacos == 1 ]; then
+  echo "copying gacos corrections"
 for epochpath in `ls -d $epochdir/20*`; do
   epoch=$(basename "$epochpath")
   # echo $epoch
   if [ $epoch -ge $startdate ] && [ $epoch -le $enddate ]; then
     gacosfile=$epochdir/$epoch/$epoch.sltd.geo.tif
-    if [ -f $gacosfile ]; then
-     ln -s $gacosfile $workdir/GACOS/$epoch.sltd.geo.tif 2>/dev/null
+    if [ -s $gacosfile ]; then
+     if [ ! -f $epoch.sltd.geo.tif ]; then
+       cp $gacosfile $workdir/GACOS/$epoch.sltd.geo.tif . 2>/dev/null
+     fi
     fi
   fi
 done
@@ -535,7 +539,7 @@ fi
 
 if [ $dolocal == 0 ]; then
   disdir=`pwd`
-  echo "Linking tif files from the LiCSAR_public directory"
+  echo "Copying tif files from the LiCSAR_public directory"
   ls $indir | grep '_' > tmp.ifgs
 if [ ! -z $2 ]; then
   echo "limiting the dataset to dates between "$startdate" and "$enddate
@@ -548,7 +552,9 @@ if [ ! -z $2 ]; then
         mkdir -p $pair
         cd $pair
         for ff in `ls $indir/$pair/*tif`; do
-          ln -s $ff
+          if [ ! -s `basename $ff` ]; then
+            cp $ff .
+          fi;
         done
         cd $disdir
       fi
@@ -561,7 +567,9 @@ else
     mkdir -p $pair
     cd $pair
     for ff in `ls $indir/$pair/*tif`; do
-      ln -s $ff
+      if [ ! -s `basename $ff` ]; then
+        cp $ff .
+      fi
     done
     cd $disdir
    fi
@@ -660,7 +668,7 @@ if [ $icams -gt 0 ]; then
         if [ ! -e $epoch/$epoch.$extfull ]; then
          mkdir -p $epoch
          cd $epoch
-         ln -s $epochpath/$epoch.$extfull
+         cp $epochpath/$epoch.$extfull .
          cd ..
         fi
       fi
@@ -787,7 +795,7 @@ if [ "$setides" -gt 0 ]; then
   #TODO: Discuss here with Milan, in SBOI we can apply SET and iono directly as we wait the deformation is smaller than the phase jumb threshold (0.7m) in SBOI?
   ##reunwrapping finalized here.
   # correct only on epoch level, i.e. now just link to 
-  echo "Linking solid earth tide corrections per epoch"
+  echo "Copying solid earth tide corrections per epoch"
   cd $disprocdir
   mkdir -p GEOC.EPOCHS; cd GEOC.EPOCHS; disdir=`pwd`;
   if [ $sbovl -gt 0 ]; then
@@ -803,7 +811,7 @@ if [ "$setides" -gt 0 ]; then
       if [ ! -e $epoch/$epoch.$extfull ]; then
           mkdir -p $epoch
           cd $epoch
-          ln -s $epochpath/$epoch.$extfull
+          cp $epochpath/$epoch.$extfull .
           cd $disdir
       fi
     fi
@@ -1061,7 +1069,7 @@ if [ "$iono" -gt 0 ]; then
         if [ ! -e "$epoch/$epoch.$ext" ]; then
           mkdir -p "$epoch"
           cd "$epoch"
-          ln -s "$epochpath/$epoch.$ext"
+          cp "$epochpath/$epoch.$ext" .
           cd "$disdir"
         fi
       fi
