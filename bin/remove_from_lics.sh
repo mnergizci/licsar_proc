@@ -24,7 +24,7 @@ if [ ! `echo $epoch | cut -c -2` -eq 20 ]; then
  exit
 fi
 
-changefile=/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/frameid_changes.txt
+changefile=/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/frameid_changes.txt
 if [ `grep -c ^$frame $changefile` -gt 0 ]; then
  line=`grep ^$frame $changefile`;
  echo "frame ID changed: " $line;
@@ -62,7 +62,7 @@ fi
 #echo "ls -d $pubdir/*/*$epoch*"
 
 # adding to log file
-logfile=/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/updates/`date +'%Y%m%d'`.$frame.removed
+logfile=/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/updates/`date +'%Y%m%d'`.$frame.removed
 touch $logfile; chmod 775 $logfile
 find $pubdir -name '*'$epoch'*' >> $logfile
 

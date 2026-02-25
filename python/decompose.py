@@ -382,7 +382,7 @@ def decompose_np(vel_asc, vel_desc, aschead, deschead, ascinc, descinc, beta=0, 
 
 '''
 this is to load 3 datasets and decompose them:
-dirpath='/gws/nopw/j04/nceo_geohazards_vol1/public/shared/temp/earmla'
+dirpath='/gws/ssde/j25a/nceo_geohazards/vol1/public/shared/temp/earmla'
 #for frame in []
 nc1 = os.path.join(dirpath, '051D_03973_131313.nc')
 nc1=xr.open_dataset(nc1)

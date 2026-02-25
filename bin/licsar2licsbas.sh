@@ -1081,9 +1081,9 @@ if [ "$iono" -gt 0 ]; then
   cd $workdir
 fi
 
-#hgtfile=/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/12/012A_05443_131313/metadata/012A_05443_131313.geo.hgt.tif
- #epath=/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/12/012A_05443_131313/epochs
- #ifgspath=/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/12/012A_05443_131313/interferograms
+#hgtfile=/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/12/012A_05443_131313/metadata/012A_05443_131313.geo.hgt.tif
+ #epath=/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/12/012A_05443_131313/epochs
+ #ifgspath=/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/12/012A_05443_131313/interferograms
  #frame=012A_05443_131313
  #ext=diff_pha
  #for ifg in `ls interferograms`; do

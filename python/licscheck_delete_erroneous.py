@@ -67,7 +67,7 @@ for epoch in set(epochs):
 
 exit()
 
-procdir = '/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current'
+procdir = '/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current'
 tr=str(int(frame[:3]))
 for epoch in epochs:
     lut = os.path.join(procdir,tr,frame,'LUT',epoch+'.7z')

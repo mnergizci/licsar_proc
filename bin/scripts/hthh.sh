@@ -225,7 +225,7 @@ def rad2mm_s1(inrad):
 lat=-20.548
 lon=-175.45
 
-epochsdir='/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/102/102D_11050_000002/epochs'
+epochsdir='/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/102/102D_11050_000002/epochs'
 
     #wavelength=0.055465763
     #mcoef=4*PI/$wavelength
@@ -358,8 +358,8 @@ cd $rslcdir
 mliwid=`grep range_samples $mpar | gawk {'print $2'}`
 mlilen=`grep azimuth_lines $mpar | gawk {'print $2'}`
 demwid=226
-geolt=/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/102/102D_11050_000002/GEC/gec.lt
-dempar=/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/102/102D_11050_000002/GEC/fake.seg.dem_par
+geolt=/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/102/102D_11050_000002/GEC/gec.lt
+dempar=/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/102/102D_11050_000002/GEC/fake.seg.dem_par
 for s in `ls`; do if [ ! $m == $s ]; then cd $s;
  spar=$rslcdir/$s/$s.$ext.rslc.par
  sslc=$rslcdir/$s/$s.$ext.rslc

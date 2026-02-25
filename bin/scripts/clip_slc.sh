@@ -92,7 +92,7 @@ fi
 #if [ ! -d $demdir ]; then demdir=`pwd`/DEM; fi  # maybe it is there, locally?
 #if [ ! -d $demdir ]; then
 # # maybe running from ARC? try copy:
-# scp -r -i /home/home02/earmla/.ssh/id_jasmin xfer-vm-01.jasmin.ac.uk:/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/`track_from_frame $frame`/$frame/DEM .
+# scp -r -i /home/home02/earmla/.ssh/id_jasmin xfer-vm-01.jasmin.ac.uk:/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/`track_from_frame $frame`/$frame/DEM .
 #fi
 #if [ ! -d $demdir ]; then echo "something wrong with the frame "$frame". Fix this please"; exit; fi
 #dempar=$demdir/dem_crop.dem_par
@@ -110,7 +110,7 @@ slcpar=SLC/$master/$master.slc.par
 if [ ! -f $slcpar ]; then echo "the folder is empty, or no mosaic of ref epoch exists - exiting"; exit; fi
 
 #'clip_slc.sh 72.510 72.845 38.130 38.365 3934 0.00027'
-#/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/subsets/SAREZ/005D
+#/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/subsets/SAREZ/005D
 outdir=$1
 if [ -d $outdir ]; then echo "STOP, this directory already exists. skipping for now, as this need some more thinking"; exit; fi
 mkdir -p $outdir 2>/dev/null

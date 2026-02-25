@@ -28,7 +28,7 @@ results=asf.search(dataset='NISAR', processingLevel='GSLC')  # or 'GUNW'
 asf_session = get_asf_session()
 results.download(path='.', session=asf_session)   # tested - works ok
 
-def download(filename, slcdir = '/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/SLC', ingest = False, provider='cdse'):
+def download(filename, slcdir = '/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/SLC', ingest = False, provider='cdse'):
     '''wrapper to wget commands. the provider must be one of ['cdse', 'alaska']
     '''
     # slcdir = os.environ['LiCSAR_SLC']

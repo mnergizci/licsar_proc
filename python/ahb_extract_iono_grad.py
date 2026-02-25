@@ -11,7 +11,7 @@ import sys
 
 fr=sys.argv[1]
 
-ahbdir='/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/AHB'
+ahbdir='/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/AHB'
 mahb=os.path.join(ahbdir, 'Milan')
 figdir=os.path.join(ahbdir+'_figures', 'ionoetc')
 outfile=os.path.join(ahbdir,'ionograds',fr+'.nc')

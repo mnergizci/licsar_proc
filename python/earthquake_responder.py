@@ -71,7 +71,7 @@ def get_range_from_magnitude(M, depth, unit = 'km'):
     return distance
 
 
-def create_eq_csv(csvfile = '/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/EQ/eqs.csv'):
+def create_eq_csv(csvfile = '/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/EQ/eqs.csv'):
     #get all eqs
     query = "select * from eq;"
     eq_df = lq.do_pd_query(query)
@@ -148,14 +148,14 @@ def add_new_event(event, updatecsv = True):
         lq.do_query("update eq set location='{0}' where USGS_ID='{1}'".format(event.location.replace("'"," "), event.id), 1)
     if updatecsv:
         # if in licsar:
-        if os.path.exists('/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/EQ/eqs.csv'):
+        if os.path.exists('/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/EQ/eqs.csv'):
             update_eq_csv(event.id)
         else:
             update_eq_csv(event.id, eqcsvfile)
     return True
 
 
-def update_eq_csv(eventid, csvfile = '/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/EQ/eqs.csv', delete=False):
+def update_eq_csv(eventid, csvfile = '/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/EQ/eqs.csv', delete=False):
     if os.path.exists(csvfile+'.lock'):
         print('file lock detected, waiting 10 minutes - should be enough for ARC to finish')
         time.sleep(10*60)
@@ -178,7 +178,7 @@ def update_eq_csv(eventid, csvfile = '/gws/nopw/j04/nceo_geohazards_vol1/public/
             return False
 
 
-def regenerate_eq2frames_csv(csvfile = '/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/EQ/eqframes.csv'):
+def regenerate_eq2frames_csv(csvfile = '/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/EQ/eqframes.csv'):
     query = "select p.polyid_name as frame, ST_aswkb(pg.geom) as the_geom, eq.USGS_ID as usgsid, eq.location, e2f.post_acq as next_possible, e2f.next_acq as next_expected  \
         from eq2frame e2f inner join eq on e2f.eqid=eq.eqid inner join polygs2gis pg  \
         on pg.polyid=e2f.fid inner join polygs p on p.polyid=e2f.fid"
@@ -247,7 +247,7 @@ def get_days_since_last_acq(frame, eventtime = dt.datetime.now(), metafile = Fal
     return (eventtime - lastone).days
 
 
-def update_eq2frames_csv(eventid, csvfile = '/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/EQ/eqframes.csv', metafile = False, delete = False):
+def update_eq2frames_csv(eventid, csvfile = '/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/EQ/eqframes.csv', metafile = False, delete = False):
     """
        eventid -- USGS ID of given event
        delete -- perform deletion of the given event from the csvfile, instead of adding it
@@ -767,7 +767,7 @@ def import_to_licsinfo_eq2frame(eqid, event, frame, postacq = True, active = Tru
     return True
 
 
-def is_blacklisted(eventid, blacklistfile = '/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/EQ/eq_blacklist.txt'):
+def is_blacklisted(eventid, blacklistfile = '/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/EQ/eq_blacklist.txt'):
     """
     Check if the event is blacklisted (i.e. to skip this EQ)
     Args:
@@ -855,7 +855,7 @@ def process_eq(eventid = 'us70008hvb', step = 1, overwrite = False, makeactive =
         radius = 0.18
     if not skipchecks:
         #check if the event is not blacklisted..
-        blacklistfile = '/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/EQ/eq_blacklist.txt'
+        blacklistfile = '/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/EQ/eq_blacklist.txt'
         if misc.grep1line(eventid,blacklistfile):
             print('the event is blacklisted. cancelling')
             return
@@ -945,7 +945,7 @@ def process_eq(eventid = 'us70008hvb', step = 1, overwrite = False, makeactive =
             new_kmls = create_kmls(frame,event.time, onlycoseismic, overwrite, event)
             # create_kmls(frame, toi, onlycoseismic = False, overwrite = False)
             if new_kmls:
-                eqsfile = '/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/EQ/eqs.csv'
+                eqsfile = '/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/EQ/eqs.csv'
                 if not misc.grep1line(event.id,eqsfile):
                     update_eq_csv(event.id, eqsfile)
                     update_eq2frames_csv(event.id)
@@ -1069,7 +1069,7 @@ def main():
                             #    print('some error happened during processing frame '+frame)
                             if new_kmls:
                                 #so if something was generated, update it to the list of eqs
-                                eqsfile = '/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/EQ/eqs.csv'
+                                eqsfile = '/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/EQ/eqs.csv'
                                 if not misc.grep1line(event.id,eqsfile):
                                     update_eq_csv(event.id, eqsfile)
                                     update_eq2frames_csv(event.id)

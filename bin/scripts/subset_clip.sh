@@ -7,13 +7,13 @@
 # outputs will be stored as subset.$locationname
 #
 # must be run inside the subset directory, e.g. in
-# /gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/subsets/kladno/095D
+# /gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/subsets/kladno/095D
 makemlinc=1  # this will create MLI NetCDF file.. that should be actually converted to amplitude (and put dB in)
 
 minepoch=20240101
 
-#ls /gws/nopw/j04/nceo_geohazards_vol1/public/shared/temp/earmla/kladno/kz4
-#cd /gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/subsets/kladno/095D
+#ls /gws/ssde/j25a/nceo_geohazards/vol1/public/shared/temp/earmla/kladno/kz4
+#cd /gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/subsets/kladno/095D
 centerlon=14.00393208465662
 centerlat=50.12668894637102
 halflenrg=14
@@ -156,9 +156,9 @@ bb=xr.DataArray(data=data, dims=['epoch','azi','rg'], coords=dict(azi=np.arange(
 bb=xr.Dataset(data_vars=dict(amplitude=bb))
 outnc = '$locname.$relorb.amp.nc'
 # bb=xr.Dataset(data_vars=dict(amplitude_dB=bb))
-#outnc = '/gws/nopw/j04/nceo_geohazards_vol1/public/shared/temp/earmla/kladno/kz4/095c.nc'
-#outnc = '/gws/nopw/j04/nceo_geohazards_vol1/public/shared/temp/earmla/kladno/kz4/146.nc'
-#outnc = '/gws/nopw/j04/nceo_geohazards_vol1/public/shared/temp/earmla/kladno/kz4/44.nc'
+#outnc = '/gws/ssde/j25a/nceo_geohazards/vol1/public/shared/temp/earmla/kladno/kz4/095c.nc'
+#outnc = '/gws/ssde/j25a/nceo_geohazards/vol1/public/shared/temp/earmla/kladno/kz4/146.nc'
+#outnc = '/gws/ssde/j25a/nceo_geohazards/vol1/public/shared/temp/earmla/kladno/kz4/44.nc'
 bb.to_netcdf(outnc)
 
 EOF
@@ -172,7 +172,7 @@ exit
 
 
 # how i did kladno:
-cd /gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/subsets/kladno
+cd /gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/subsets/kladno
 python3
 import pandas as pd
 import os, glob

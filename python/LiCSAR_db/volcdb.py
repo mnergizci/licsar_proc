@@ -75,7 +75,7 @@ res
 """
 
 def export_all_volclips_to_kml(outkml):
-    """e.g. outkml='/gws/nopw/j04/nceo_geohazards_vol1/public/shared/temp/earmla/volclips.kml'"""
+    """e.g. outkml='/gws/ssde/j25a/nceo_geohazards/vol1/public/shared/temp/earmla/volclips.kml'"""
     volclips=get_volclips_gpd()
     volclips.to_file(outkml, driver='KML')
 
@@ -425,7 +425,7 @@ def init_all_subsets(volcid = None, full_overlap=True, only_classed=True):
                     initialise_subset_volclip(vid, frame,full_overlap=full_overlap)
                 except:
                     print('error with init, cleaning')
-                    subsetdir = '/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/subsets/volc/'+str(vid)+'/'+frame[:4]
+                    subsetdir = '/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/subsets/volc/'+str(vid)+'/'+frame[:4]
                     if os.path.exists(subsetdir):
                         os.system('rm -rf '+subsetdir)
 
@@ -440,7 +440,7 @@ def init_volcs_in_frame(frame, full_overlap=True):
             initialise_subset_volclip(vid, frame,full_overlap=full_overlap)
         except:
             print('error with init, cleaning')
-            subsetdir = '/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/subsets/volc/'+str(vid)+'/'+frame[:4]
+            subsetdir = '/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/subsets/volc/'+str(vid)+'/'+frame[:4]
             if os.path.exists(subsetdir):
                 os.system('rm -rf '+subsetdir)
 """

@@ -472,7 +472,7 @@ def main():
         ifgdir = sys.argv[1]
     except:
         print('please provide parameter: interferograms directory, e.g. ')
-        print('quality_check.py /gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/144/144D_05102_121313/interferograms')
+        print('quality_check.py /gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/144/144D_05102_121313/interferograms')
         exit()
     if not os.path.exists(ifgdir):
         print('the provided directory {} does not exist'.format(ifgdir))

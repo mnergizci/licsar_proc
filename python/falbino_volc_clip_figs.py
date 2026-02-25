@@ -73,7 +73,7 @@ if COUNTRY == 'autoframe':
 
 
 # main volc-proc directory:
-HOMEPATH = '/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/volc-proc/'
+HOMEPATH = '/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/volc-proc/'
 # list database directory:
 LISTPATH = HOMEPATH + 'list_database/'
 # database directory:
@@ -457,7 +457,7 @@ def process_frame_volcano(options):
         _log_message('{0} :: DEM RESIZE {1} CREATED'.format(volc_label, demfile2))
         volc_out['tif'] += 1
     # 2b- CREATE MASK BASED ON SENTINEL-2
-    dirmask_S2 = '/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/GIS/'
+    dirmask_S2 = '/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/GIS/'
     maskfile_S2 = 'water_mask.tif'
     input_mask = os.path.join(dirmask_S2, maskfile_S2)
     maskfile2 = dirname + '_mask_water.tif'
@@ -1104,7 +1104,7 @@ def main():
         try:
             licspath = os.environ['LiCSAR_public']
         except:
-            licspath = '/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products.public/'
+            licspath = '/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products.public/'
         framepath = os.path.join(licspath, number, frame, 'interferograms/')
         epochpath = os.path.join(licspath, number, frame, 'epochs/')
         paths = (framepath, epochpath)

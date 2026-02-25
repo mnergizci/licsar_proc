@@ -126,7 +126,7 @@ This approach is implemented in LiCSBAS as LiCSBAS02to05_unwrap.py and details a
 To show an example, this is how we could use range offsets [px] to support unwrapping:
 ::
    from lics_unwrap import *
-   ifgdir = '/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/21/021D_05266_252525/interferograms/20230129_20230210'
+   ifgdir = '/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/21/021D_05266_252525/interferograms/20230129_20230210'
    phatif = os.path.join(ifgdir, '20230129_20230210.geo.diff_pha.tif')
    cohtif = os.path.join(ifgdir, '20230129_20230210.geo.cc.tif')
    rngtif = os.path.join(ifgdir, '20230129_20230210.geo.rng.tif')

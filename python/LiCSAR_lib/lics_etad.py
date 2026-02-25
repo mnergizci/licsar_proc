@@ -105,8 +105,8 @@ def rad2mm_s1(inrad):
     outmm = inrad*coef_r2m
     return outmm
 
-etaf1 = '/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/insar_proc/earmla/ETAD/etad/S1B_IW_ETA__AXDV_20180930T230604_20180930T230632_012950_017EB9_D6C7.SAFE'
-etaf2 = '/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/insar_proc/earmla/ETAD/etad/S1B_IW_ETA__AXDV_20181012T230605_20181012T230633_013125_018409_D9EC.SAFE'
+etaf1 = '/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/insar_proc/earmla/ETAD/etad/S1B_IW_ETA__AXDV_20180930T230604_20180930T230632_012950_017EB9_D6C7.SAFE'
+etaf2 = '/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/insar_proc/earmla/ETAD/etad/S1B_IW_ETA__AXDV_20181012T230605_20181012T230633_013125_018409_D9EC.SAFE'
 eta1 = Sentinel1Etad(etaf1)
 eta2 = Sentinel1Etad(etaf2)
 

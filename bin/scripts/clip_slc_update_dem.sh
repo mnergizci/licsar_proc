@@ -6,7 +6,7 @@
 # source $LiCSARpath/lib/LiCSAR_bash_lib.sh
 
 # please run this inside the subset directory, e.g.
-# cd /gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/subsets/firat/043A
+# cd /gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/subsets/firat/043A
 
 # the most important part - get the lonlats
 lonlats=`cat sourcecmd.txt | gawk {'print $3, $4, $5, $6'}`

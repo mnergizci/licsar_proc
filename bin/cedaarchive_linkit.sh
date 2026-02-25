@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LiCSAR_public=/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products_test
+LiCSAR_public=/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products_test
 cd $LiCSAR_public
 frame=041A_04785_131313
 track=`track_from_frame $frame`

@@ -8,7 +8,7 @@ if [ $overwrite -eq 1 ]; then
 fi
 
 if [ -z $1 ]; then echo "parameter is full path to the folder containing geotiffs";
-echo "e.g. /gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/58/058A_05279_131311/interferograms/20190317_20190323"
+echo "e.g. /gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/58/058A_05279_131311/interferograms/20190317_20190323"
 echo "if second (optional) parameter is a frame name, it will use it in the output filename (e.g. 058A_05279_131311_20200505_20200517.kmz)"
 exit;
 fi

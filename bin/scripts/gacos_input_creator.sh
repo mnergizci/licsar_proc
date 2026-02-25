@@ -20,7 +20,7 @@ minbtemp=3
 
 prod_dir=$LiCSAR_public
 # old gacos dir:
-#work_dir="/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/GACOS"
+#work_dir="/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/GACOS"
 work_dir=$LiCSAR_GACOS
 if [ -z $work_dir ]; then
    work_dir='/work/scratch-pw3/licsar/GACOS'

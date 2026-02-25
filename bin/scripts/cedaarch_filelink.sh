@@ -39,7 +39,7 @@ if [[ ! "png tif" =~ $ext ]]; then
 fi
 
 # construct expected /neodc path
-# /gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products.public/41/041A_05430_131313/interferograms/20170724_20210820/20170724_20210820.geo.unw.tif
+# /gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products.public/41/041A_05430_131313/interferograms/20170724_20210820/20170724_20210820.geo.unw.tif
 filrev=`echo $filepubdir | rev`
 track=`echo $filrev | cut -d '/' -f 5 | rev`
 frame=`echo $filrev | cut -d '/' -f 4 | rev`

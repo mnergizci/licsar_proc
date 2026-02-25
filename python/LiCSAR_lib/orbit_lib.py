@@ -179,8 +179,8 @@ def getoldorbpath(orbfiles):
     oldorbs = []
     for orbfile in orbfiles:
         ff = os.path.basename(orbfile)
-        #orbfile ='/gws/nopw/j04/nceo_geohazards_vol1/orbits_2021/S1A/POEORB/S1A_OPER_AUX_POEORB_OPOD_20210309T002908_V20180831T225942_20180902T005942.EOF'
-        oldpath = '/gws/nopw/j04/nceo_geohazards_vol1/orbits.old/S1'+ff[2]+'/POEORB'
+        #orbfile ='/gws/ssde/j25a/nceo_geohazards/vol1/orbits_2021/S1A/POEORB/S1A_OPER_AUX_POEORB_OPOD_20210309T002908_V20180831T225942_20180902T005942.EOF'
+        oldpath = '/gws/ssde/j25a/nceo_geohazards/vol1/orbits.old/S1'+ff[2]+'/POEORB'
         oldorbcands = glob.glob(os.path.join(oldpath, 'S1'+ff[2]+'_OPER_AUX_POEORB_OPOD_*_V'+ff.split('V')[1]))
         oldorb = None
         for oldorbcand in oldorbcands:
@@ -776,7 +776,7 @@ def findValidOrbFile(baseDir,sat,startTime,endTime):
     """ Searches baseDir for an orbit file which is valid for given satalite,
     start time and end time. Returns None if no file found
     Args:
-        baseDir (str): where to search, e.g. /gws/nopw/j04/nceo_geohazards_vol1/orbits.old
+        baseDir (str): where to search, e.g. /gws/ssde/j25a/nceo_geohazards/vol1/orbits.old
         sat (str): either 'S1A' or 'S1B'
         startTime, endTime (dt.datetime)
     """

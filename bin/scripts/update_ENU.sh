@@ -1,5 +1,5 @@
-PATH1=/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current
-PATH_PUBLIC=/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products
+PATH1=/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current
+PATH_PUBLIC=/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products
 
 #update all
 for TRACK in `ls $PATH_PUBLIC/* -d | rev | cut -d '/' -f1 | rev`; do

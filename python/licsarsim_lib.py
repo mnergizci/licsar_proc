@@ -91,8 +91,8 @@ import time
 # DEM must be clipped to target area - you should use Geotiff (but gamma DEM should also work - just it might fail in some later step if par does not exist)
 '''
 # adding calibrated mlis:
-pp=/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/subsets/volc
-OUTDIR=/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/subsets/volc/for_simsar
+pp=/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/subsets/volc
+OUTDIR=/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/subsets/volc/for_simsar
 slcdir=SLC # or RSLC to do it for all...
 if [ $slcdir == 'SLC' ]; then
  slcc=slc
@@ -599,7 +599,7 @@ out.rio.to_raster('test2.tif')
 
 
 '''
-inpath=/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/subsets/volc/20
+inpath=/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/subsets/volc/20
 for fr in `ls $inpath`; do
   echo $fr
   mkdir $fr
