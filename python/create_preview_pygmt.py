@@ -13,13 +13,13 @@ def main():
     parser.add_argument("--label", default='unit',
                         help="label below the colour scale")
     parser.add_argument("--lims", nargs=2, type=float,
-                        help="min max of colour map (set as separate numbers, e.g. --lims -10 10")
+                        help="min max of colour map (set as separate numbers, e.g. --lims -10 10) by default: auto (min/max)")
     parser.add_argument("--cmap", default='roma',
-                        help="colour scale map (def: roma, try e.g. vik, viridis")
+                        help="colour scale map (def: roma, try e.g. vik, viridis, gray)")
     parser.add_argument("--photobg", action='store_true',
                         help="adds photo background")
     parser.add_argument("--dpi", default=150, type=int,
-                        help="DPI for output png")
+                        help="DPI for output png (default: 150)")
     parser.add_argument("--projection", default='M10c',
                         help="standard GMT projection string")
     parser.add_argument("--region", nargs=4, type=float,
