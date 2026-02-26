@@ -164,11 +164,19 @@ def get_orb_dir_old( sat ):
                 orbdir = parser.get( 'paths', 'S1Borbitpath' ) 
             except:
                 orbdir = []
-        else:
+        elif sat == 'S1C':
             try:
                 orbdir = parser.get('paths', 'S1Corbitpath')
             except:
                 orbdir = []
+        elif sat == 'S1D':
+            try:
+                orbdir = parser.get('paths', 'S1Dorbitpath')
+            except:
+                orbdir = []
+        else:
+            print('ERROR, only S1A-D available in mk_imag_lib')
+            return []
     except:
         orbdir = os.environ[ 'ORBs_DIR' ] + '/' + sat
     return orbdir
