@@ -4,18 +4,18 @@
 #for additional coherence map workaround
 module load doris
 
-pubdir=/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products
+pubdir=/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products
 cat << EOF > ~/logs/tmp_procdirs.txt
-/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/volc
-/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/volc/frames/103
-/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/volc/frames/124
-/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/volc/frames/134
-/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/volc/frames/142
-/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/volc/frames/152
-/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/volc/frames/16
-/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/volc/frames/26
-/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/volc/frames/32
-/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/volc/frames/62
+/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/volc
+/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/volc/frames/103
+/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/volc/frames/124
+/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/volc/frames/134
+/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/volc/frames/142
+/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/volc/frames/152
+/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/volc/frames/16
+/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/volc/frames/26
+/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/volc/frames/32
+/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/volc/frames/62
 EOF
 
 for fromdir in `cat ~/logs/tmp_procdirs.txt`; do

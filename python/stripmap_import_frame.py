@@ -5,7 +5,7 @@ from batchDBLib import get_polyid
 import sys, os, glob
 
 dir = sys.argv[1]
-#dir = '/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/stripmap/075A_SM_FOGO_S6'
+#dir = '/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/stripmap/075A_SM_FOGO_S6'
 if not os.path.exists(dir):
     print('wrong dir - please correct')
     print('run this script with a (full) path to the stripmap frame folder')

@@ -54,7 +54,7 @@ reg="-R2014-09-01T/2019-02-01T/$min_p/$max_p"
 
 #cp /Volumes/a1/insar/sentinel1/COMET_priority_areas/gmt.conf .
 #scripts_dir=/group_workspaces/cems2/nceo_geohazards/projects/LiCS/insar_proc/priority_areas/scripts
-scripts_dir=/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/insar_proc/priority_areas/scripts
+scripts_dir=/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/insar_proc/priority_areas/scripts
 cp ${scripts_dir}/gmt.conf `pwd`
 
 gmt gmtset PS_MEDIA a4

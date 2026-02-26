@@ -478,7 +478,7 @@ display IFG/20230129_20230210/20230129_20230210.diff.bmp &
 some older notes here, just in case if useful for the full approach (that failed):
 
 # and finally, recreate the RSLC with that - first in the subset:
-cd /gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/subsets/test_tur_rs/021D
+cd /gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/subsets/test_tur_rs/021D
 #mv ~/outlutfile OFF/20230129_20230210/offsets.filtered.lut
 #mv ~/outlutfilefull OFF/20230129_20230210/offsets.filtered.lut.full
 

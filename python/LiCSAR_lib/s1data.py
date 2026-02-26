@@ -36,7 +36,7 @@ def download(uuid, slcdir):
     return rc
 '''
 
-def download(filename, slcdir = '/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/SLC', ingest = False, provider='cdse'):
+def download(filename, slcdir = '/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/SLC', ingest = False, provider='cdse'):
     '''wrapper to wget commands. the provider must be one of ['cdse', 'alaska']
     '''
     # slcdir = os.environ['LiCSAR_SLC']
@@ -79,7 +79,7 @@ def get_bperps_asf(product_id):
     
 
 
-def download_asf(filename, slcdir = '/gws/nopw/j04/nceo_geohazards_vol2/LiCS/temp/SLC', ingest = False):
+def download_asf(filename, slcdir = '/gws/ssde/j25a/nceo_geohazards/vol2/LiCS/temp/SLC', ingest = False):
     # slcdir = os.environ['LiCSAR_SLC']
     wgetpath = os.environ['LiCSARpath']+'/bin/scripts/wget_alaska'
     cmd = 'cd {0}; {1} {2}'.format(slcdir, wgetpath, filename)

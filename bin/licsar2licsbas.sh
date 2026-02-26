@@ -55,8 +55,8 @@ if [ -z $1 ]; then
  echo "-p ........ finalise by correcting plate motion velocity w.r.t. Eurasia (plus correct ref effect in vstd)"
  echo "-b ........ would start sbovls-licsbas (use dev version here..)"
  echo "-q ........ if sbovl-licsbas, will rerun again to check high residual in first inversion (LiCSBAS13)"
- echo "-x .......  if sbovl active, will use RANSAC is used to guide the daz values by incorporating the sbovl interferograms, allowing the LiCSBAS sbovl processing to continue using absolute values"
- echo "-Z .......  cumulative process - will generates the cumulative displacement (w.r.t. the first epoch) tif files, after the LiCSBAS processing. It is in progress, please contact the MN or ML if you want to use."
+ echo "-x .......  if sbovl active, will use RANSAC to guide the daz values by incorporating the sbovl interferograms, allowing the LiCSBAS sbovl processing to continue using absolute values"
+ echo "-Z .......  cumulative process - will generate the cumulative displacement (w.r.t. the first epoch) tif files, after the LiCSBAS processing. It is in progress, please contact the MN or ML if you want to use."
  echo "Note: you may want to check https://comet-licsar.github.io/licsar_proc/index.html#reunwrapping-existing-interferograms"
  echo "note: in case you combine -G and -u, the result will be in clip folder without GACOS! (still not smoothly combined reunw->licsbas, todo!)"  # updated on 2022-04-07
  echo "(note: if you do -M 1, it will go for reprocessing using the cascade/multiscale unwrap approach - in testing, please give feedback to Milan)"
@@ -323,6 +323,7 @@ fi
 
 ##if sbovl is open these should be closed automatically!
 if [ $sbovl -gt 0 ]; then
+ echo "using sbovls - disabling -u -g etc (if set)"
  reunw=0
  dogacos=0
  deramp=0 #not sure yet?
@@ -430,13 +431,14 @@ for meta in E N U hgt; do
   # echo "getting metafiles from GEOC/lookangles" # - might need updating in future"
   ln -s `pwd`/lookangles/$master.geo.$meta.tif `pwd`/$master.geo.$meta.tif
  else
-  ln -s $metadir/$frame.geo.$meta.tif
+  # ln -s $metadir/$frame.geo.$meta.tif
+  cp $metadir/$frame.geo.$meta.tif .
  fi
  # ln -sf "$metadir/$frame.geo.$meta.tif" "$frame.geo.$meta.tif"
 
   if [ "$sbovl" -gt 0 ] && [ "$meta" != "hgt" ]; then
     if [ -s "$metadir/$frame.geo.$meta.azi.tif" ]; then  # Check the file and ensure it's not empty
-      ln -sf "$metadir/$frame.geo.$meta.azi.tif" "$frame.geo.$meta.azi.tif"
+      cp "$metadir/$frame.geo.$meta.azi.tif" "$frame.geo.$meta.azi.tif"
     else
       need_to_generate_azi=1  # Mark that we need to generate azi files
     fi
@@ -476,7 +478,7 @@ if [ "$sbovl" -gt 0 ] && [ "$need_to_generate_azi" -eq 1 ]; then
   # Create missing symbolic links for azi files
   for meta in E N U; do # hgt is same 
     if [ ! -s "$frame.geo.$meta.azi.tif" ]; then
-      ln -sf "$metadir/$frame.geo.$meta.azi.tif" "$frame.geo.$meta.azi.tif"
+      cp "$metadir/$frame.geo.$meta.azi.tif" "$frame.geo.$meta.azi.tif"
     fi
   done
 fi
@@ -492,7 +494,7 @@ if [ $dolocal == 1 ]; then
    disadir=`pwd`; cd $workdir; create_geoctiffs_to_pub.sh -M . $master; cd $disadir
  fi
 fi
-ln -s $metadir/baselines
+cp $metadir/baselines .
 
 
 if [ -f $workdir/GEOC.MLI/$master/$master.geo.mli.tif ]; then
@@ -510,23 +512,26 @@ if [ ! -f $epochdir/$master/$master.geo.mli.tif ]; then
  fi
 fi
 if [ -f $epochdir/$master/$master.geo.mli.tif ]; then
- ln -s $epochdir/$master/$master.geo.mli.tif
+ cp $epochdir/$master/$master.geo.mli.tif .
 else
  echo "warning, primary epoch not in public dir. trying to use other, expect possible size issues.."
  lastimg=`ls $epochdir/*/*.geo.mli.tif | tail -n1`
- ln -s $lastimg
+ cp $lastimg .
 fi
 fi
 
 
 if [ $dogacos == 1 ]; then
+  echo "copying gacos corrections"
 for epochpath in `ls -d $epochdir/20*`; do
   epoch=$(basename "$epochpath")
   # echo $epoch
   if [ $epoch -ge $startdate ] && [ $epoch -le $enddate ]; then
     gacosfile=$epochdir/$epoch/$epoch.sltd.geo.tif
-    if [ -f $gacosfile ]; then
-     ln -s $gacosfile $workdir/GACOS/$epoch.sltd.geo.tif 2>/dev/null
+    if [ -s $gacosfile ]; then
+     if [ ! -f $epoch.sltd.geo.tif ]; then
+       cp $gacosfile $workdir/GACOS/$epoch.sltd.geo.tif . 2>/dev/null
+     fi
     fi
   fi
 done
@@ -534,7 +539,7 @@ fi
 
 if [ $dolocal == 0 ]; then
   disdir=`pwd`
-  echo "Linking tif files from the LiCSAR_public directory"
+  echo "Copying tif files from the LiCSAR_public directory"
   ls $indir | grep '_' > tmp.ifgs
 if [ ! -z $2 ]; then
   echo "limiting the dataset to dates between "$startdate" and "$enddate
@@ -547,7 +552,9 @@ if [ ! -z $2 ]; then
         mkdir -p $pair
         cd $pair
         for ff in `ls $indir/$pair/*tif`; do
-          ln -s $ff
+          if [ ! -s `basename $ff` ]; then
+            cp $ff .
+          fi;
         done
         cd $disdir
       fi
@@ -560,7 +567,9 @@ else
     mkdir -p $pair
     cd $pair
     for ff in `ls $indir/$pair/*tif`; do
-      ln -s $ff
+      if [ ! -s `basename $ff` ]; then
+        cp $ff .
+      fi
     done
     cd $disdir
    fi
@@ -659,7 +668,7 @@ if [ $icams -gt 0 ]; then
         if [ ! -e $epoch/$epoch.$extfull ]; then
          mkdir -p $epoch
          cd $epoch
-         ln -s $epochpath/$epoch.$extfull
+         cp $epochpath/$epoch.$extfull .
          cd ..
         fi
       fi
@@ -678,12 +687,12 @@ if [ "$setides" -gt 0 ]; then
   disprocdir=$(pwd)
 
   if [ "$reunw" -gt 0 ]; then  # in such case we correct before unwrapping || [ "$sbovl" -gt 0 ]
-    if [ "$sbovl" -gt 0 ]; then
-      echo "applying the SET correction in azimuth"
-      mkdir -p GEOC.corr ##this is to store the corrections
-    else
+    # if [ "$sbovl" -gt 0 ]; then
+    #  echo "applying the SET correction in azimuth"
+    #  mkdir -p GEOC.corr ##this is to store the corrections
+    #else
       echo "applying the SET correction in range"
-    fi
+    # fi
     # now using them to create either pha or unw tifs (to GEOC)
     cd GEOC
     disdir=$(pwd)
@@ -695,9 +704,9 @@ if [ "$setides" -gt 0 ]; then
     hgtfile="$disdir/$hgtfile"
     regt=$(gmt grdinfo "$hgtfile" | grep "registration" | awk '{print $2}')
     #if [ $extofproc == 'unw' ]; then grdmextra=''; else grdmextra='WRAP'; fi   # now use only for wrapped data..
-    # grdmextra='WRAP'
-    if [ "${extofproc}" == "sbovldiff.adf.mm" ]; then grdmextra=""; else grdmextra="WRAP"; fi 
-    
+    grdmextra='WRAP'
+    # if [ "${extofproc}" == "sbovldiff.adf.mm" ]; then grdmextra=""; else grdmextra="WRAP"; fi
+
     for pair in $(ls -d 20??????_20??????); do
       echo "$pair"
       cd "$pair"
@@ -707,12 +716,12 @@ if [ "$setides" -gt 0 ]; then
       echo "Checking file: $infile"
 
       # First, check if infile is a symlink
-      if [ ! -L "$infile" ]; then
-        if [ "$sbovl" -gt 0 ]; then
-          echo "Warning: $infile is not a symlink, checking alternative file (bovl)..."
-          infile="$infile2"
-        fi
-      fi
+      #if [ ! -L "$infile" ]; then
+      #  if [ "$sbovl" -gt 0 ]; then
+      #    echo "Warning: $infile is not a symlink, checking alternative file (bovl)..."
+      #    infile="$infile2"
+      #  fi
+      #fi
 
       # Now check if the updated infile is still missing
       if [ ! -L "$infile" ]; then
@@ -725,14 +734,14 @@ if [ "$setides" -gt 0 ]; then
       outfile="$(pwd)/$pair.geo.$extofproc.notides.tif" ##after that one sbovl and bovl is called as sbovl?
       tobad=0
       if [ ! -f "$outfile" ]; then
-        if [ "$sbovl" -gt 0 ]; then
-          tided1="$epochdir/$date1/$date1.tide.geo.azi.tif"
-          tided2="$epochdir/$date2/$date2.tide.geo.azi.tif"
-          outcorfile="$disprocdir/GEOC.corr/$pair.geo.$extofproc.tides_correction.tif"  
-        else
+        #if [ "$sbovl" -gt 0 ]; then
+        #  tided1="$epochdir/$date1/$date1.tide.geo.azi.tif"
+        #  tided2="$epochdir/$date2/$date2.tide.geo.azi.tif"
+        #  outcorfile="$disprocdir/GEOC.corr/$pair.geo.$extofproc.tides_correction.tif"
+        #else
           tided1="$epochdir/$date1/$date1.tide.geo.tif"
           tided2="$epochdir/$date2/$date2.tide.geo.tif" # should be A-B....
-        fi
+        #fi
 
         if [ -f "$tided1" ] && [ -f "$tided2" ]; then
           # 2025/10: the gridline vs pixel registration was really pain... instead, just using the python command - bit slower but works..
@@ -786,7 +795,7 @@ if [ "$setides" -gt 0 ]; then
   #TODO: Discuss here with Milan, in SBOI we can apply SET and iono directly as we wait the deformation is smaller than the phase jumb threshold (0.7m) in SBOI?
   ##reunwrapping finalized here.
   # correct only on epoch level, i.e. now just link to 
-  echo "Linking solid earth tide corrections per epoch"
+  echo "Copying solid earth tide corrections per epoch"
   cd $disprocdir
   mkdir -p GEOC.EPOCHS; cd GEOC.EPOCHS; disdir=`pwd`;
   if [ $sbovl -gt 0 ]; then
@@ -802,7 +811,7 @@ if [ "$setides" -gt 0 ]; then
       if [ ! -e $epoch/$epoch.$extfull ]; then
           mkdir -p $epoch
           cd $epoch
-          ln -s $epochpath/$epoch.$extfull
+          cp $epochpath/$epoch.$extfull .
           cd $disdir
       fi
     fi
@@ -930,6 +939,7 @@ if [ "$iono" -gt 0 ]; then
 	 done
 	 rm $tmpy
 
+  # ML: the condition below is never happening... TODO for MN - perhaps just delete the section?
   elif [ "$sbovl" -gt 0 ] && [ "$reunw" -gt 0 ]; then ##Iono looks more complex so let's do it in another elif block ##TODO sbovl correction will be applied in in the cum, so I have put reunw condition to skip here.
    echo "applying the ionospheric correction for SBOI"    
    ######
@@ -1059,7 +1069,7 @@ if [ "$iono" -gt 0 ]; then
         if [ ! -e "$epoch/$epoch.$ext" ]; then
           mkdir -p "$epoch"
           cd "$epoch"
-          ln -s "$epochpath/$epoch.$ext"
+          cp "$epochpath/$epoch.$ext" .
           cd "$disdir"
         fi
       fi
@@ -1071,9 +1081,9 @@ if [ "$iono" -gt 0 ]; then
   cd $workdir
 fi
 
-#hgtfile=/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/12/012A_05443_131313/metadata/012A_05443_131313.geo.hgt.tif
- #epath=/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/12/012A_05443_131313/epochs
- #ifgspath=/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/12/012A_05443_131313/interferograms
+#hgtfile=/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/12/012A_05443_131313/metadata/012A_05443_131313.geo.hgt.tif
+ #epath=/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/12/012A_05443_131313/epochs
+ #ifgspath=/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/12/012A_05443_131313/interferograms
  #frame=012A_05443_131313
  #ext=diff_pha
  #for ifg in `ls interferograms`; do

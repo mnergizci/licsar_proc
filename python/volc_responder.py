@@ -11,8 +11,8 @@ import glob
 import pandas as pd
 
 public_path = os.environ['LiCSAR_public']
-framelistfile = '/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/volc-proc/active_frames.txt'
-customframesfile = '/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/volc-proc/active_frames_custom.txt'
+framelistfile = '/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/volc-proc/active_frames.txt'
+customframesfile = '/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/volc-proc/active_frames_custom.txt'
 
 def download_volc_kml(kmzfile = 'WeeklyVolcanoGE-Reports.kmz'):
     #thanks Fabien for this!
@@ -53,7 +53,7 @@ def get_frames_from_kml(filename = 'WeeklyVolcanoGE-Reports.kml'):
                 frames_set.add(frame)
     return list(frames_set)
 
-def update_framelist_fabien(volcdir = '/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/volc-proc/list_database'):
+def update_framelist_fabien(volcdir = '/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/volc-proc/list_database'):
     '''
     this will update list of frames that will be used for given volcano in the volcano portal
     '''
@@ -143,7 +143,7 @@ def main():
     #if nowis.day in [5,15,25]:
     #if nowis.day in [5,15,24, 26, 28]:
     #print('done. now updating the png files - Fabien script')
-    #cmd = 'cd /gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/volc-proc/python_script/FINAL_scripts; sbatch run_LiCSAR_volcano_makefigure_final_withGACOS.LOTUS2.sh'
+    #cmd = 'cd /gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/volc-proc/python_script/FINAL_scripts; sbatch run_LiCSAR_volcano_makefigure_final_withGACOS.LOTUS2.sh'
     #os.system(cmd)
     print('ok, everything finished')
 

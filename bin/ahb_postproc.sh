@@ -194,7 +194,7 @@ for fr in ????_?????_??????; do
     fi; fi;
   done
   fi
-  cd /gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/AHB
+  cd /gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/AHB
 done
 # this would nanify values from ionovel where vel is 0 or nan
 
@@ -202,8 +202,8 @@ done
 ## how to do in jobs (run for iono where needed)
 for x in ????_?????_??????; do
   if [ ! -f $x/$x.iono.vel.tif ]; then echo $x; cd $x;
-  bsub2slurm.sh  -q short-serial -M 16384 -o ionolotus.o -e ionolotus.e /gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/AHB/Milan/doinslurm.sh $x.cum.h5 $x;
-  cd /gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/AHB;
+  bsub2slurm.sh  -q short-serial -M 16384 -o ionolotus.o -e ionolotus.e /gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/AHB/Milan/doinslurm.sh $x.cum.h5 $x;
+  cd /gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/AHB;
   fi;
 done
 
@@ -254,7 +254,7 @@ done
 fr=''  # set the frame ID – this frame must be already inside the $LiCSAR_public/AHB directory
 import lics_unwrap as lu
 import glob, os
-outdir='/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/AHB'
+outdir='/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/AHB'
 ml=10
 tr=str(int(fr[:3]))
 outveltif = os.path.join(outdir, fr, fr+'.vel_filt.mskd.eurasia.geo.tif')
@@ -285,7 +285,7 @@ def find_owner(filename):
 
 def fix_enus(fr, ml=10, onlyrights=False):
     tr=str(int(fr[:3]))
-    outdir='/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/AHB'
+    outdir='/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/AHB'
     outveltif=os.path.join(outdir, fr, fr+'.vel_filt.mskd.eurasia.geo.tif')
     if not os.path.exists(outveltif):
         print(fr+' not ready')
@@ -307,7 +307,7 @@ def fix_enus(fr, ml=10, onlyrights=False):
                 rc = os.system('chmod 444 '+outfile)
 
 
-#testf='/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/AHB/173A_04952_131313/173A_04952_131313.E.geo.tif'
+#testf='/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/AHB/173A_04952_131313/173A_04952_131313.E.geo.tif'
 #os.system('gwschown -n --no-warn earmla '+testf)
 f='enusredo.txt'
 a=pd.read_csv(f,header=None)

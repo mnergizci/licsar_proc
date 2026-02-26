@@ -170,7 +170,7 @@ time offset_pwr_tracking RSLC/$m/$m.rslc$extd RSLC/$s/$s.rslc$extd RSLC/$m/$m.rs
 
 # ok ok, so now i do only the deramped...
 #e.g., for the test_EQ_tur:
-#cd /gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/proc/current/subsets/test_tur_rs/021D
+#cd /gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/proc/current/subsets/test_tur_rs/021D
 #time offset_pwr_tracking RSLC/$m/$m.rslc RSLC/$s/$s.rslc RSLC/$m/$m.rslc.par RSLC/$s/$s.rslc.par $outdir/tracking.off $outdir/tracking.offsets $outdir/tracking.corr 128 64 - 2 0.2 20 4 #- - - - - - 0 1 - - $outdir/tracking.corrstd
 
 # only 1 oversample

@@ -27,7 +27,7 @@ import xarray as xr
 #from lics_unwrap import *
 
 
-ahbdir='/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/AHB'
+ahbdir='/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/AHB'
 mahb=os.path.join(ahbdir, 'Milan')
 figdir=os.path.join(ahbdir+'_figures', 'ionoetc')
 #os.listdir(figdir)
@@ -76,8 +76,8 @@ df_sun = pd.DataFrame(
 
 
 import glob
-descs = glob.glob('/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/AHB/ionograds/*D*.nc')
-ascs = glob.glob('/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/AHB/ionograds/*A*.nc')
+descs = glob.glob('/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/AHB/ionograds/*D*.nc')
+ascs = glob.glob('/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/AHB/ionograds/*A*.nc')
 
 i=0
 ncpath = descs[i]
@@ -102,8 +102,8 @@ regiongrad=[dt.datetime(2015,1,1).date(), dt.datetime(2024,12,31).date(), 0, 0.7
 vertical_date = pd.Timestamp("2020-02-01")
 
 import glob
-descs = glob.glob('/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/AHB/ionograds/*D*.nc')
-ascs = glob.glob('/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/AHB/ionograds/*A*.nc')
+descs = glob.glob('/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/AHB/ionograds/*D*.nc')
+ascs = glob.glob('/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/AHB/ionograds/*A*.nc')
 
 #####################################
 fig.basemap(
@@ -202,8 +202,8 @@ region=regiongrad
 vertical_date = pd.Timestamp("2020-02-01")
 
 import glob
-descs = glob.glob('/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/AHB/gacosgrads/*D*.nc')
-ascs = glob.glob('/gws/nopw/j04/nceo_geohazards_vol1/public/LiCSAR_products/AHB/gacosgrads/*A*.nc')
+descs = glob.glob('/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/AHB/gacosgrads/*D*.nc')
+ascs = glob.glob('/gws/ssde/j25a/nceo_geohazards/vol1/public/LiCSAR_products/AHB/gacosgrads/*A*.nc')
 
 doscs = descs
 doscs = ascs

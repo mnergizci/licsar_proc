@@ -1,7 +1,7 @@
 
 
 # script to reunwrap all and save as geo.unw_GACOS.tif
-for aam in /gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/volc-proc/current/central_america /gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/volc-proc/current/south_america; do
+for aam in /gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/volc-proc/current/central_america /gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/volc-proc/current/south_america; do
 cd $aam
 pwd
 for x in *_*_*_*; do
@@ -66,11 +66,11 @@ VOLC_NAME=
 VOLC_FRAME=`pwd`
 VOLC_FRAME=`basename $VOLC_FRAME`
 WEB_RESOLS='50 75 100'
-OUT_DIR='/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/volc-portal/processing_output/licsbas_gacos'
+OUT_DIR='/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/volc-portal/processing_output/licsbas_gacos'
 
-JSON_SCRIPT1='/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/volc-portal/processing_scripts/licsbas/data_to_json.py'
+JSON_SCRIPT1='/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/volc-portal/processing_scripts/licsbas/data_to_json.py'
 # script for making JSON for web usage:
-JSON_SCRIPT2='/gws/nopw/j04/nceo_geohazards_vol1/projects/LiCS/volc-portal/processing_scripts/licsbas/convert_json_for_web.py'
+JSON_SCRIPT2='/gws/ssde/j25a/nceo_geohazards/vol1/projects/LiCS/volc-portal/processing_scripts/licsbas/convert_json_for_web.py'
 
 
 python ${JSON_SCRIPT1} */cum.h5 data.json
