@@ -16,7 +16,7 @@ import s1data as s1
 # import datetime as dt
 import subprocess as subp
 from glob import glob
-from configparser import SafeConfigParser
+from configparser import ConfigParser
 import copy
 #LiCSAR global configuration
 import global_config as gc
@@ -151,7 +151,7 @@ def get_orb_dir( sat ):
 
 
 def get_orb_dir_old( sat ):
-    parser = SafeConfigParser()
+    parser = ConfigParser()
     try:
         parser.read( os.environ[ 'LiCSARconfig' ] )
         if sat == 'S1A':
@@ -782,7 +782,7 @@ def make_frame_image( date, framename, burstlist, procdir, licsQuery,
                 for zipFile in glob(imdir+'/*.zip'):
                     #Loop through zipfiles and get valis orbit file
                     print("Updating orbit for {0}".format(zipFile))
-                    mtch = re.search('.*(S1[ABCD]).*',zipFile)
+                    mtch = re.search(r'.*(S1[ABCD]).*',zipFile)
                     sat = mtch.groups()[0]
                     localOrbDir = get_orb_dir(sat)
                     try:
@@ -935,7 +935,7 @@ def make_frame_image( date, framename, burstlist, procdir, licsQuery,
                 for zipFile in glob(imdir+'/*.zip'):
                     #Loop through zipfiles and get valis orbit file
                     print("Updating orbit for {0}".format(zipFile))
-                    mtch = re.search('.*(S1[ABCD]).*',zipFile)
+                    mtch = re.search(r'.*(S1[ABCD]).*',zipFile)
                     sat = mtch.groups()[0]
                     localOrbDir = get_orb_dir(sat)
                     orbit = getValidOrbFile(localOrbDir,zipFile)
@@ -972,7 +972,7 @@ def make_frame_image( date, framename, burstlist, procdir, licsQuery,
             for zipFile in glob(imdir+'/*.zip'):
                 #Loop through zipfiles and get valis orbit file
                 print("Updating orbit for {0}".format(zipFile))
-                mtch = re.search('.*(S1[ABCD]).*',zipFile)
+                mtch = re.search(r'.*(S1[ABCD]).*',zipFile)
                 sat = mtch.groups()[0]
                 localOrbDir = get_orb_dir(sat)
                 try:
